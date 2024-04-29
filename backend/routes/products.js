@@ -35,4 +35,32 @@ router.post('/', async (req, res) => {
         res.status(500).json({message:'Server error'});
     }
 });
+// PUT update a product by ID
+router.put('/:id', async (req, res) => {
+    try {
+      const updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if (!updatedProduct) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      res.json(updatedProduct);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  });
+  
+  // DELETE a product by ID
+  router.delete('/:id', async (req, res) => {
+    try {
+      const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+      if (!deletedProduct) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+      res.json({ message: 'Product deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server Error' });
+    }
+  });
+  
 module.exports = router;
