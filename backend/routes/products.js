@@ -5,13 +5,19 @@ const Product = require('../models/Product');
 //GET all Products
 
 productsRouter.get('/', async (req, res) => {
-    try{
-        const products = await Product.find();
-        res.json(products);
-    } catch(err){
-        console.error(err);
-        res.status(500).json({message:'Server error'});
+  try {
+    const { category } = req.query;
+    let products;
+    if (category) {
+        products = await Product.find({ category: category.toLowerCase() });
+    } else {
+        products = await Product.find();
     }
+    res.json(products);
+} catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+}
 });
 // productsRouter.get('/',(req, res) => {
 //     res.json(({message:'homepage'}));

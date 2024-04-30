@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const productsRouter = require('./routes/products');
+const { userRouter } = require('./routes/userRoutes');
+
 
 const app = express();
 
@@ -15,7 +17,7 @@ db.once('open',() => {
     console.log('Connected to Mongodb');
 });
 //Routes
-
+app.use('/users', userRouter);
 app.use('/api', productsRouter);
 
 // app.use('/',(req, res) => {
