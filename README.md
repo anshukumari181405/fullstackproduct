@@ -1,4 +1,4 @@
-# React-Redux Shopping Cart App
+# Shopping Cart App
 
 This project is a simple shopping cart application built with React and Redux. It allows users to view a list of products, add them to the cart, and manage the cart contents.
 
